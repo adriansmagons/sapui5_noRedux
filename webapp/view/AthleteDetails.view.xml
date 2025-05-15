@@ -1,0 +1,76 @@
+<mvc:View
+	controllerName="ui5.fitnessApp.controller.AthleteDetails"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<core:Fragment fragmentName="ui5.fitnessApp.fragments.NavBar" type="XML"/>
+
+    <Page title="Athlete details">
+
+        <content>
+			<ObjectHeader
+				title="{athleteModel>name} {athleteModel>surname}"
+				backgroundDesign="Solid"
+				number="{
+					parts:[{path:'Price'},{path:'CurrencyCode'}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {showMeasure: false}
+				}"
+				numberUnit="{CurrencyCode}" >
+				<attributes>
+					<ObjectAttribute title="Age" text="{athleteModel>age}" />
+					<ObjectAttribute title="Position" text="{athleteModel>position}" />
+				</attributes>
+				<statuses>
+					<ObjectStatus title="Activity right now" text="Resting" state="Success" />
+				</statuses>
+			</ObjectHeader>
+			<IconTabBar
+				class="sapUiSmallMarginBottom sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter
+						key="training"
+						text="Training log">
+						<Table id="sessions_table" headerText="Training sessions" width="auto" class="sapUiResponsiveMargin" items="{athleteModel>trainingSessions}">
+							<columns>
+								<Column>
+									<Text text="ID"></Text>
+								</Column>
+								<Column>
+									<Text text="Date"></Text>
+								</Column>
+								<Column>
+									<Text text="Type"></Text>
+								</Column>
+				
+               				</columns>
+               				<items >
+                  				<ColumnListItem type="Inactive" press=".onAthletePress">
+                     				<cells>
+										<ObjectIdentifier 
+										title="{athleteModel>_id}"/>
+										<ObjectIdentifier 
+										title="{athleteModel>date}"/>
+										<ObjectIdentifier 
+										title="{athleteModel>type}"/>
+									
+                     				</cells>
+                  				</ColumnListItem>
+               				</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabFilter
+						key="Games"
+						text="Game history">
+						<List headerText="A List" showSeparators="Inner" >
+						</List>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+    </Page>
+</mvc:View>

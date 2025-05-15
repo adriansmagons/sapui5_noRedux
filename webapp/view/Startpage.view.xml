@@ -1,0 +1,83 @@
+<mvc:View
+   controllerName="ui5.fitnessApp.controller.Startpage"
+   xmlns="sap.m"
+   xmlns:tnt="sap.tnt"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:core="sap.ui.core"
+   displayBlock="true">
+   <core:Fragment fragmentName="ui5.fitnessApp.fragments.NavBar" type="XML" />
+   <Page title="Manage players">
+  
+	<content>
+		<Panel> 
+			<content>
+				<Table id="players_table" items="{athleteModel>/athletes}">
+               <headerToolbar>
+                  <OverflowToolbar>
+									<content>
+										<ToolbarSpacer/>
+										<SearchField
+											id="searchField"
+											width="20%"
+											placeholder="Search by surname"
+											search=".onSearch"/>
+										<Button
+											id="refreshAthletesBtn"
+											icon="sap-icon://refresh"
+											press=".onRefresh"/>
+                              <Button
+                                 id="addAthletesRow"
+                                 icon="sap-icon://add"
+                                 press=".onAddRow"
+                              />
+                               <ToggleButton
+                                 id="deleteAthletesRow"
+                                 icon="sap-icon://delete"
+                                 press=".toggleDeleteRow"
+                                 enabled="true"
+                              />
+									</content>
+								</OverflowToolbar>
+               </headerToolbar>
+               <columns>
+                  <Column>
+                     <Text text="Name"></Text>
+                  </Column>
+                  <Column>
+                     <Text text="Surname"></Text>
+                  </Column>
+                  <Column>
+                     <Text text="Position"></Text>
+                  </Column>
+                  <Column>
+                     <Text text="Games"></Text>
+                  </Column>
+                  <Column>
+                     <Text text="Training sessions"></Text>
+                  </Column>
+                  
+               </columns>
+               <items >
+                  <ColumnListItem type="Navigation" press=".onAthletePress">
+                     <cells>
+                        <ObjectIdentifier 
+                           title="{athleteModel>name}"/>
+                        <ObjectIdentifier 
+                           title="{athleteModel>surname}"/>
+                        <ObjectIdentifier 
+                           title="{athleteModel>position}"/>
+                        <ObjectIdentifier 
+                           title="{athleteModel>position}"/>
+                        <ObjectIdentifier 
+                           title="{athleteModel>trainingSessionCount}"/>
+                        <CheckBox selected="false"/>   <!-- Shows up only when column is inserted-->
+                     </cells>
+                  </ColumnListItem>
+               </items>
+            </Table>
+			</content>
+		</Panel>
+	</content>
+   </Page>
+   
+</mvc:View>

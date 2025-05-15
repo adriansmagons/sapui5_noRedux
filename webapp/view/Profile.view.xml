@@ -1,0 +1,79 @@
+<mvc:View 
+	controllerName="ui5.fitnessApp.controller.Profile"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	displayBlock="true">
+	<core:Fragment fragmentName="ui5.fitnessApp.fragments.NavBar" type="XML" />
+	<Page title="{i18n>adminProfileTitle}">
+
+	<content>
+		<Panel> 
+			<content>
+
+			<FlexBox 
+				alignItems="Start"
+				justifyContent="SpaceBetween">
+				<VBox alignItems="Center" justifyContent="Start">
+					<Avatar
+							src="sap-icon://customer"
+							displaySize="XL"
+							displayShape="Square"
+							showBorder="true"
+							press="onPress"/>
+					<Text
+							text="Avatar of a product with border"
+							class="sapUiSmallMarginTop"/>
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+								<ObjectAttribute title="Followers" text="100"/>
+								<ObjectAttribute title="Following" text="100"/>
+					</layout:VerticalLayout>
+
+					<layoutData>
+						<FlexItemData growFactor="1" />
+					</layoutData>
+				</VBox>
+				<IconTabBar
+				id="idIconTabBarNoIcons"
+				expanded="true"
+				expandable="false"
+				class="sapUiResponsiveContentPadding">
+					<items>
+						<IconTabFilter text="Overview" key="info">
+							<layout:VerticalLayout class="sapUiMediumMarginEnd">
+								<ObjectAttribute title="Name" text="some name"/>
+								<ObjectAttribute title="Surname" text="some surname"/>
+								<ObjectAttribute title="Weight" text="65 kg"/>
+								<ObjectAttribute title="Calories burned today" text="34"/>
+							</layout:VerticalLayout>
+							<layout:VerticalLayout class="sapUiMediumMarginEnd">
+								<ObjectAttribute title="Completed excercises" text="some name"/>
+							</layout:VerticalLayout>
+						</IconTabFilter>
+						<IconTabFilter text="Attachments" key="attachments">
+							<Text text="Attachments go here ..." />
+						</IconTabFilter>
+						<IconTabFilter text="Notes" key="notes">
+							<Text text="Notes go here ..." />
+						</IconTabFilter>
+						<IconTabFilter text="People" key="people">
+							<Text text="People content goes here ..." />
+						</IconTabFilter>
+					</items>
+					<layoutData>
+						<FlexItemData growFactor="2" />
+					</layoutData>
+				</IconTabBar>
+			</FlexBox>
+
+				
+			</content>
+		</Panel>
+	</content>
+	
+		
+	</Page>
+		
+</mvc:View>

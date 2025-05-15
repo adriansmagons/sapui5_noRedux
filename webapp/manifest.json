@@ -1,0 +1,93 @@
+
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "ui5.fitnessApp",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": {
+      "sap.ui.core": {},
+      "sap.m": {}
+      }
+	},
+	"models": {
+      "i18n": {
+      "type": "sap.ui.model.resource.ResourceModel",
+      "settings": {
+        "bundleName": "ui5.fitnessApp.i18n.i18n",
+        "supportedLocales": [""],
+        "fallbackLocale": ""
+      }
+      }
+	},
+	"rootView": {
+		"viewName": "ui5.fitnessApp.view.App",
+		"type": "XML",
+		"id": "app"
+	},
+  "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "ui5.fitnessApp.view",
+        "controlId": "app",
+        "controlAggregation": "pages"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "home",
+          "target": "home"
+        },
+        {
+          "pattern": "profile",
+          "name": "profile",
+          "target": "profile"
+        },
+        {
+          "pattern": "athleteDetails",
+          "name": "athleteDetails",
+          "target": "athleteDetails"
+        },
+        {
+          "pattern": "athleteDetails/{athletePath}",
+          "name": "athleteDetails",
+          "target": "athleteDetails"
+        }
+      ],
+      "targets": {
+        "home": {
+          "id": "home",
+          "name": "Startpage"
+        },
+        "profile": {
+          "id": "profile",
+          "name": "Profile"
+        },
+        "athleteDetails": {
+          "id": "athleteDetails",
+          "name": "AthleteDetails"
+        }
+      }
+    }
+  }
+}
