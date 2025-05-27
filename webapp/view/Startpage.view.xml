@@ -28,14 +28,16 @@
                               <Button
                                  id="addAthletesRow"
                                  icon="sap-icon://add"
-                                 press=".onAddRow"
-                              />
+                                 press=".onAddRow"/>
                                <ToggleButton
                                  id="deleteAthletesRow"
                                  icon="sap-icon://delete"
                                  press=".toggleDeleteRow"
-                                 enabled="true"
-                              />
+                                 enabled="true"/>
+                               <Button
+                                 id="fetchFromApi"
+                                 text="Fetch from server"
+                                 press=".onFetchFromServer"/>
 									</content>
 								</OverflowToolbar>
                </headerToolbar>
@@ -48,9 +50,6 @@
                   </Column>
                   <Column>
                      <Text text="Position"></Text>
-                  </Column>
-                  <Column>
-                     <Text text="Games"></Text>
                   </Column>
                   <Column>
                      <Text text="Training sessions"></Text>
@@ -67,10 +66,8 @@
                         <ObjectIdentifier 
                            title="{athleteModel>position}"/>
                         <ObjectIdentifier 
-                           title="{athleteModel>position}"/>
-                        <ObjectIdentifier 
                            title="{athleteModel>trainingSessionCount}"/>
-                        <CheckBox selected="false"/>   <!-- Shows up only when column is inserted-->
+                        <Button icon="sap-icon://delete" press="onDeleteRow"/>    <!-- Shows up only when column is inserted-->
                      </cells>
                   </ColumnListItem>
                </items>

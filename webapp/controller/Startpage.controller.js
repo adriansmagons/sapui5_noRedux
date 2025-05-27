@@ -1,25 +1,20 @@
 sap.ui.define([
-	"sap/m/messageToast",
+	"sap/m/MessageToast",
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
     "sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-	"sap/ui/model/FilterType",
-    "sap/m/table/columnmenu/MenuBase",
     "sap/m/table/columnmenu/Menu",
     "sap/m/table/columnmenu/QuickSort",
     "sap/m/table/columnmenu/QuickSortItem",
-    "sap/m/Menu",
-    "sap/m/MenuItem",
     "sap/m/Dialog",
     "sap/m/Button",
     "sap/m/library",
-	"sap/m/input",
+	"sap/m/Input",
 	"sap/m/VBox",
 	"sap/m/Column",
 	"sap/m/Text"
- ], (MessageToast, Controller, JSONModel, Sorter, Filter, FilterOperator, FilterType, MenuBase, ColumnMenu, QuickSort, QuickSortItem, Menu, MenuItem, Dialog, Button, mobileLibrary, Input, VBox, Column, Text) => {
+ ], (MessageToast, Controller, Sorter, Filter, FilterOperator, ColumnMenu, QuickSort, QuickSortItem, Dialog, Button, mobileLibrary, Input, VBox, Column, Text) => {
     "use strict";
 
     // shortcut for sap.m.ButtonType
@@ -43,7 +38,6 @@ sap.ui.define([
             document.activeElement.blur();
 
             let oContext = oEvent.getSource().getBindingContext("athleteModel");
-            let sAthleteId = oContext.getProperty("_id");
             const oRouter = this.getOwnerComponent().getRouter();
 			oRouter.navTo("athleteDetails", {
                 athletePath: window.encodeURIComponent(oContext.getPath().substring(1))
@@ -93,7 +87,6 @@ sap.ui.define([
 					})
 				]
 			}));
-
         },
 
         onSearch: function(oEvent){
@@ -143,7 +136,7 @@ sap.ui.define([
 							let sPosition = this.oPositionInput.getValue();
 							let sAge = this.oAgeInput.getValue();
 							let sGender = this.oGenderInput.getValue();
-							this._handleRowInsert(sName, sSurname, sPosition, sAge, sGender);
+							this.handleRowInsert(sName, sSurname, sPosition, sAge, sGender);
 
 							this.oNameInput.setValue(""); 
 							this.oSurnameInput.setValue(""); 
@@ -155,6 +148,7 @@ sap.ui.define([
 						}.bind(this)
 					}),
 					endButton: new Button({
+						type: "Reject",
 						text: "Cancel",
 						press: function () {
 							this.oDefaultDialog.close();
@@ -168,22 +162,29 @@ sap.ui.define([
 
 			this.oDefaultDialog.open();
 		},
+		onDeleteRow(oEvent){
+			let oContext = oEvent.getSource().getBindingContext("athleteModel");
+			debugger
+			let sAthleteId = oContext.getProperty("_id");
+			let athleteModelData = this.getOwnerComponent().getModel("athleteModel").getData();
+			let oFilteredData = athleteModelData.athletes.filter((athlete) => athlete._id !== sAthleteId);
+			this.getOwnerComponent().getModel("athleteModel").setData({athletes: oFilteredData})
+		},
 
 		toggleDeleteRow(oEvent){  // not implemented yet
 			const oTable = this.getView().byId("players_table");
+
 			if(oEvent.getSource().getPressed()){
 				this.oSelectColumn = new Column({
 					header: new Text ({text: "Select"})
 				});
 				oTable.addColumn(this.oSelectColumn);
-				debugger
-				let oContext = oEvent.getSource().getBindingContext("athleteModel");
 			}else{
 				oTable.removeColumn(oTable.getColumns().length - 1);
 			}
 		},
 
-		_handleRowInsert(sName, sSurname, sPosition, sAge, sGender){       // Implement ID
+		handleRowInsert(sName, sSurname, sPosition, sAge, sGender){       // Implement ID
 			let athleteModel = this.getOwnerComponent().getModel("athleteModel");
 			let oAthletes = athleteModel.getProperty("/athletes");
 			let newRow = {
@@ -197,10 +198,21 @@ sap.ui.define([
 
 			oAthletes.push(newRow);
 			athleteModel.setProperty("/athletes", oAthletes);
-			debugger
 
 			MessageToast.show("Athlete was added successfully!");
 
+		},
+		onFetchFromServer: async function(oEvent){
+            MessageToast.show("Fetching data");
+			let athleteModel = this.getOwnerComponent().getModel("athleteModel");
+             try {
+				const response = await fetch('http://localhost:3001/api/athletes');
+				const data = await response.json();
+				athleteModel.setProperty("/athletes", data);
+
+			} catch (error) {
+				console.error('Fetching data failed:', error);
+			}
 		},
     });
  });

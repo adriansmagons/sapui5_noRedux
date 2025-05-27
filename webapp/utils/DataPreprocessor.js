@@ -5,14 +5,13 @@ sap.ui.define(["sap/ui/base/Object"], function(BaseObject) {
 
     },
     fetchData: async function (aUrls) {
-        try{
+        try {
             let promises = aUrls.map((url) => fetch(url));
             let allResponses = await Promise.all(promises);
             let fetchData = await Promise.all(allResponses.map((res) => res.json()));
             
             return fetchData
-            debugger
-        }catch (err){
+        } catch (err){
             throw new Error(`Data fetch failed: ${err}`);
         }
     },

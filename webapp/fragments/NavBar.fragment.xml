@@ -16,14 +16,6 @@
                         icon="sap-icon://customer"
                         key="profile">
                     </IconTabFilter>
-                    <IconTabFilter
-                        icon="sap-icon://notes"
-                        key="Exercise">
-                    </IconTabFilter>
-                    <IconTabFilter 
-                        icon="sap-icon://group"
-                        key="people">
-                    </IconTabFilter>
                 </items>
             
     </IconTabBar>
@@ -31,14 +23,5 @@
                 <FlexItemData growFactor="4" />
             </layoutData>
     </FlexBox>
-
-    <!-- <FlexBox alignItems="End" >
-        <Button text="Login">
-            <layoutData>
-                <FlexItemData growFactor="1" />
-            </layoutData>
-        </Button>
-    </FlexBox> -->
-    
 </FlexBox>
     

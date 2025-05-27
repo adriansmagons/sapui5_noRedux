@@ -45,11 +45,6 @@
 							<layout:VerticalLayout class="sapUiMediumMarginEnd">
 								<ObjectAttribute title="Name" text="some name"/>
 								<ObjectAttribute title="Surname" text="some surname"/>
-								<ObjectAttribute title="Weight" text="65 kg"/>
-								<ObjectAttribute title="Calories burned today" text="34"/>
-							</layout:VerticalLayout>
-							<layout:VerticalLayout class="sapUiMediumMarginEnd">
-								<ObjectAttribute title="Completed excercises" text="some name"/>
 							</layout:VerticalLayout>
 						</IconTabFilter>
 						<IconTabFilter text="Attachments" key="attachments">
